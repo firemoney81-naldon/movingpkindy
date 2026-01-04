@@ -1,23 +1,654 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- Schema.org FAQ 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "포장이사와 일반이사의 가장 큰 차이점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "포장이사는 포장부터 정리까지 모든 과정을 업체가 전담하여 고객의 편의성이 높지만 비용이 비쌉니다. 반면 일반이사는 고객이 직접 짐을 포장하고 정리하며, 업체는 운반과 배치만 담당하여 비용이 저렴합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "이사 비용은 어떤 요인에 의해 결정되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "이사 비용은 이사 날짜(성수기/비수기), 출발지와 도착지 거리, 짐의 양(평수), 층수(사다리차 사용 여부), 특수 짐(피아노, 에어컨 등), 서비스 옵션(정리 정돈, 청소 등) 등 다양한 요인에 의해 결정됩니다. 정확한 견적을 위해 현장 방문 견적을 받는 것이 좋습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "이사 날짜 선택 시 비용 절약을 위한 팁이 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "이사 성수기(손 없는 날, 주말, 연휴)를 피하고 비수기인 평일이나 12월~1월을 이용하면 비용을 절감할 수 있습니다. 특히 2026년에는 '손 없는 날' 일정을 미리 확인하고, 겹치지 않는 평일을 선택하는 것이 좋습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "짐이 적은 원룸이나 오피스텔 이사 시에는 어떤 서비스를 선택해야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "짐이 적은 경우 일반이사나 반포장이사를 고려해볼 수 있습니다. 포장이사는 편리하지만 원룸 이사 비용으로는 다소 부담이 될 수 있습니다. 짐이 적고 간단하다면 용달이사나 반포장이사를 통해 비용을 절약할 수 있습니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- 스타일: 부드럽고 다채로운 색, 타이틀 강조, 계층 구조 -->
+    <style>
+      :root {
+        --primary-color: #2A4D69;
+        --secondary-color: #4B86B4;
+        --accent-color: #ADCBE3;
+        --highlight-color: #E7EFF6;
+        --text-color: #2D3E50;
+        --bg-light: #F0F4F8;
+        --bg-white: #ffffff;
+        --btn-color: #FF6F61;
+        --btn-hover: #FF4F3B;
+      }
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin:0; padding:0;
+        background-color: var(--bg-light);
+        color: var(--text-color);
+        line-height:1.7;
+        font-size:16px;
+      }
+      .container {
+        max-width: 1100px;
+        margin:0 auto;
+        padding:0 20px;
+      }
+      header {
+        background-color: var(--primary-color);
+        padding: 30px 20px;
+        text-align: center;
+        color: var(--bg-white);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.8em;
+        font-weight:900;
+      }
+      header h1 a {
+        color: var(--bg-white);
+        text-decoration: none;
+      }
+      .hero {
+        background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+        color: var(--bg-white);
+        text-align: center;
+        padding: 80px 20px 60px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero:before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.1"><circle cx="50" cy="50" r="40" fill="%23FFFFFF"/></svg>');
+          background-size: 100px;
+          opacity: 0.2;
+      }
+      .hero h1 {
+        font-size: 3.5em;
+        margin-bottom: 20px;
+        font-weight:900;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        position: relative;
+      }
+      .hero p {
+        font-size: 1.4em;
+        margin-bottom: 35px;
+        position: relative;
+      }
+      .compare-form-box {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        margin-top: 30px;
+        width: 100%;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        color: var(--text-color);
+      }
+      .compare-form-box h2 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 25px;
+        font-size:2.2em;
+        font-weight: 700;
+      }
+      .compare-form-box label {
+        display: block;
+        margin-bottom:8px;
+        font-weight:500;
+        font-size: 1.1em;
+      }
+      .compare-form-box input, .compare-form-box select {
+        width:100%;
+        padding:12px;
+        margin-bottom:20px;
+        border:1px solid #ccc;
+        border-radius:6px;
+        box-sizing:border-box;
+        font-size:1em;
+      }
+      .cta-btn {
+        background-color: var(--btn-color);
+        color: var(--bg-white);
+        padding: 18px 45px;
+        font-size:1.3em;
+        font-weight: bold;
+        border:none;
+        border-radius:50px;
+        cursor:pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        width: 100%;
+      }
+      .cta-btn:hover {
+        background-color: var(--btn-hover);
+        transform: translateY(-3px);
+      }
+
+      .content-section {
+        margin-top: 40px;
+        background-color: var(--bg-white);
+        padding: 60px 0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border-radius: 10px;
+      }
+      .content-section h2 {
+        font-size: 2.8em;
+        color: var(--secondary-color);
+        margin-bottom:30px;
+        font-weight:900;
+        text-align:center;
+        border-bottom: 3px solid var(--accent-color);
+        padding-bottom: 15px;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .content-section h3 {
+        font-size:1.8em;
+        color: var(--primary-color);
+        margin-top:40px;
+        margin-bottom:20px;
+        font-weight:700;
+        border-left: 5px solid var(--btn-color);
+        padding-left: 15px;
+      }
+      .content-section p {
+          font-size: 1.1em;
+          color: #555;
+          margin-bottom: 15px;
+      }
+      .feature-grid {
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top:30px;
+      }
+      .feature-grid .item {
+        width: calc(33.33% - 20px);
+        margin:10px;
+        padding:20px;
+        background-color: var(--highlight-color);
+        border-radius:10px;
+        text-align:center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .feature-grid .item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+      .feature-grid .item img {
+        width:80px; height:80px;
+        margin-bottom:15px;
+      }
+      .keyword-list {
+        list-style:none;
+        padding:0;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top:30px;
+      }
+      .keyword-list li {
+        background-color: var(--secondary-color);
+        color: var(--bg-white);
+        padding:10px 20px;
+        margin:5px;
+        border-radius:20px;
+        font-weight:500;
+        font-size: 0.9em;
+        transition: background-color 0.3s;
+      }
+      .keyword-list li:hover {
+          background-color: var(--btn-hover);
+      }
+
+      /* Comparison Table Style */
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+      .comparison-table th, .comparison-table td {
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.1em;
+      }
+      .comparison-table th {
+        background-color: var(--primary-color);
+        color: var(--bg-white);
+        font-weight: 700;
+      }
+      .comparison-table td {
+        background-color: var(--bg-white);
+      }
+      .comparison-table tr:nth-child(even) td {
+          background-color: var(--highlight-color);
+      }
+      .comparison-table tr:hover td {
+          background-color: var(--accent-color);
+      }
+
+      /* Regional Keyword Section */
+      .regional-keywords {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          margin-top: 20px;
+      }
+      .regional-keywords > div {
+          width: calc(33.33% - 20px);
+          margin-bottom: 20px;
+          padding: 20px;
+          background-color: var(--highlight-color);
+          border-radius: 8px;
+      }
+      .regional-keywords h4 {
+          color: var(--primary-color);
+          font-weight: 700;
+          margin-bottom: 10px;
+          font-size: 1.2em;
+      }
+      .regional-keywords ul {
+          list-style-type: disc;
+          padding-left: 20px;
+          font-size: 0.95em;
+          color: #555;
+      }
+      .regional-keywords ul li {
+          margin-bottom: 5px;
+      }
+
+      /* FAQ Style */
+      .faq-item {
+        border-bottom:1px solid #ddd;
+        padding:20px 0;
+      }
+      .faq-item h3 {
+        cursor:pointer;
+        display:flex;
+        justify-content: space-between;
+        align-items:center;
+        font-size:1.4em;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin:0;
+      }
+      .faq-item h3::after {
+        content: '+';
+        font-size:1.5em;
+        color: var(--secondary-color);
+        transition: transform 0.3s;
+      }
+      .faq-item.active h3::after {
+        content: '-';
+        transform: rotate(180deg);
+      }
+      .faq-item p {
+        display: none;
+        padding-top:10px;
+        color:#555;
+        font-size:1.1em;
+        line-height: 1.7;
+      }
+      .faq-item.active p {
+        display: block;
+      }
+
+      /* Footer Style */
+      footer {
+        background-color: var(--primary-color);
+        color: var(--bg-white);
+        text-align:center;
+        padding: 40px 20px;
+        font-size:0.9em;
+      }
+      footer a {
+        color: var(--bg-white);
+        text-decoration:none;
+        margin:0 10px;
+      }
+      footer a:hover {
+        text-decoration:underline;
+      }
+
+      @media (max-width:900px) {
+          .feature-grid .item { width: calc(50% - 20px); }
+          .regional-keywords > div { width: calc(50% - 20px); }
+      }
+      @media (max-width:600px) {
+        .hero h1 { font-size:2.4em; }
+        .hero p { font-size:1.2em; }
+        .content-section h2 { font-size:2.2em; }
+        .compare-form-box { padding:25px; }
+        .cta-btn { padding:15px 30px; font-size:1.1em; }
+        .feature-grid .item { width:100%; margin:10px 0; }
+        .regional-keywords > div { width:100%; margin:10px 0; }
+        .keyword-list li { margin:3px; font-size:0.9em; }
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="/">포장이사 vs 일반이사 비교센터</a></h1>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section class="hero">
+            <div class="container">
+                <h1>포장이사 vs 일반이사: 무엇을 선택해야 할까요?</h1>
+                <p>2026년 최신 정보 기반, 내게 맞는 이사 서비스 완벽 가이드 및 비용 절약 팁 제공</p>
+
+                <div class="compare-form-box">
+                    <h2>무료 견적 비교 요청</h2>
+                    <p>간단한 정보 입력으로 포장이사와 일반이사 비용을 여러 업체로부터 한 번에 비교해보세요.</p>
+                    <form action="#" method="post">
+                        <label for="name">이름</label>
+                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                        <label for="phone">연락처</label>
+                        <input type="tel" id="phone" name="phone" placeholder="휴대폰 번호를 입력하세요" required>
+                        <label for="service_type">희망 이사 종류</label>
+                        <select id="service_type" name="service_type" required>
+                            <option value="">-- 선택하세요 --</option>
+                            <option value="포장이사">포장이사 (포장부터 정리까지)</option>
+                            <option value="일반이사">일반이사 (운반만)</option>
+                            <option value="반포장이사">반포장이사 (포장만 업체, 정리는 직접)</option>
+                            <option value="원룸이사">원룸이사/소형이사</option>
+                        </select>
+                        <label for="moving_date">희망 이사 날짜</label>
+                        <input type="date" id="moving_date" name="moving_date" required>
+                        <label for="from_address">출발지 주소 (시/구)</label>
+                        <input type="text" id="from_address" name="from_address" placeholder="예: 서울 강남구" required>
+                        <label for="to_address">도착지 주소 (시/구)</label>
+                        <input type="text" id="to_address" name="to_address" placeholder="예: 경기 성남시" required>
+                        <button type="submit" class="cta-btn">무료 견적 받기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>포장이사 vs 일반이사: 핵심 서비스 비교</h2>
+                <p>이사 서비스 선택은 단순히 비용뿐만 아니라 이사 당일의 편의성과 짐의 안전성까지 고려해야 합니다. 포장이사는 편리함을, 일반이사는 경제성을 중시하는 고객에게 적합합니다.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>비교 항목</th>
+                            <th>포장이사 (Full Packing Service)</th>
+                            <th>일반이사 (General Moving Service)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>서비스 범위</strong></td>
+                            <td>포장, 운반, 도착지 정리 및 배치, 마무리 청소까지 전 과정 담당</td>
+                            <td>운반 및 짐 배치만 담당. 포장/정리는 고객 직접 진행</td>
+                        </tr>
+                        <tr>
+                            <td><strong>적합 대상</strong></td>
+                            <td>바쁜 직장인, 주부, 노약자 등 편의성을 중시하는 고객</td>
+                            <td>짐이 적고 시간적 여유가 있는 고객, 비용 절감을 원하는 고객</td>
+                        </tr>
+                        <tr>
+                            <td><strong>비용 수준</strong></td>
+                            <td>높음 (평균 100~300만원 이상)</td>
+                            <td>낮음 (포장이사 대비 40~60% 수준)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>필요한 노력</strong></td>
+                            <td>매우 적음 (업체 선정 및 감독)</td>
+                            <td>높음 (모든 짐 포장 및 정리)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>짐 안전성</strong></td>
+                            <td>높음 (전문 포장재 및 인력으로 파손 위험 최소화)</td>
+                            <td>낮음 (고객 포장 방식에 따라 안전성 편차 큼)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>2026년 이사 트렌드: '반포장이사'의 등장</h3>
+                <p>최근에는 포장이사와 일반이사의 장점을 결합한 '반포장이사' 서비스도 인기를 얻고 있습니다. 반포장이사는 업체가 짐 포장까지만 해주고 고객이 직접 정리를 담당하는 방식입니다. 일반이사보다는 편리하고 포장이사보다는 저렴하여 1~2인 가구나 짐이 많지 않은 경우에 효율적입니다.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>포장이사 서비스, 제대로 알고 선택하기</h2>
+                <p>포장이사는 단순히 짐을 싸서 옮겨주는 것을 넘어, 이사 후 생활의 질을 결정하는 중요한 서비스입니다. 전문적인 포장이사를 선택할 때 체크해야 할 주요 사항들을 안내해 드립니다.</p>
+
+                <h3>1. 전문성과 인력 구성 확인</h3>
+                <p>포장이사의 품질은 투입되는 인력의 전문성에 달려있습니다. 경험이 많은 팀장급 인력과 숙련된 팀원들이 배치되는지 확인해야 합니다. 특히 주방 식기류나 고가 가전제품 포장에 숙련된 인력이 포함되는지 여부가 중요합니다.</p>
+
+                <h3>2. 추가 서비스 및 보상제도</h3>
+                <p>이사 후 청소나 가구 배치, 에어컨 설치 등의 부가 서비스가 기본 항목에 포함되는지 확인해야 합니다. 또한, 혹시 모를 파손에 대비하여 이사물품 운송 중 발생하는 손해에 대한 피해보상보험 가입 여부를 반드시 확인해야 합니다.</p>
+
+                <h3>3. 포장재의 품질</h3>
+                <p>2026년에는 환경 문제로 인해 재활용이 가능한 포장재를 사용하는 업체들이 늘어나고 있습니다. 포장재의 두께와 위생 상태를 확인하고, 특히 흙이 묻은 화분이나 음식물 쓰레기 처리 등 위생 관리에 철저한 업체를 선택해야 합니다.</p>
+
+                <h3>포장이사 진행 시 체크리스트</h3>
+                <ul>
+                    <li>귀중품 및 현금은 반드시 직접 보관</li>
+                    <li>가구 배치 계획 미리 세워두기</li>
+                    <li>에어컨, 벽걸이 TV 등 특수 가전은 별도 전문가 연결 요청 (추가 비용 발생 여부 확인)</li>
+                    <li>이사 당일 팀장 연락처 및 보상 책임자 확인</li>
+                    <li>쓰레기 처리 및 마무리 청소 범위 확인</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>일반이사 선택 가이드 및 비용 절약 노하우</h2>
+                <p>일반이사는 고객이 직접 포장하고 정리하는 만큼 비용 부담이 적다는 장점이 있습니다. 그러나 운반 과정에서 짐이 손상되거나 분실되는 위험이 있으므로 신중한 준비가 필요합니다.</p>
+
+                <h3>1. 일반이사 적합 대상</h3>
+                <p>짐이 적은 원룸 이사나 1.5톤 이하 소형 이사에 적합하며, 이사할 집이 가까워 단거리 이동인 경우에 더욱 효율적입니다. 또한, 이사 날짜가 유연하여 평일 비수기 이사를 원하는 고객에게 유리합니다.</p>
+
+                <h3>2. 일반이사 비용 절감 방법</h3>
+                <ul>
+                    <li><strong>짐 줄이기:</strong> 불필요한 가구와 물품은 미리 처분하여 짐 부피를 최소화합니다.</li>
+                    <li><strong>포장재 준비:</strong> 포장 박스, 에어캡, 테이프 등은 고객이 직접 준비합니다.</li>
+                    <li><strong>사전 작업:</strong> 가구 해체, 가전 분리 등은 이사 당일 추가 비용이 발생할 수 있으므로 미리 준비합니다.</li>
+                    <li><strong>주차 공간 확보:</strong> 이사 차량이 진입하기 어려운 좁은 골목이나 주차 공간이 없는 경우 추가 비용이 발생합니다.</li>
+                </ul>
+
+                <h3>3. 일반이사 진행 시 유의사항</h3>
+                <p>일반이사의 경우 파손에 대한 배상 책임 범위가 포장이사보다 좁을 수 있습니다. 고객이 포장한 짐 내부의 파손은 보상받기 어려울 수 있으므로, 귀중품과 파손 위험이 높은 물건은 직접 운반하거나, 포장에 특별히 신경 써야 합니다. 또한, 짐의 양을 정확하게 전달하여 적합한 인력과 차량을 배정받아야 합니다.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>전국 지역별 포장이사/일반이사 서비스 비교 (2026년 기준)</h2>
+                <p>지역별 이사 환경과 인건비 수준은 이사 비용에 큰 영향을 미칩니다. 대도시와 지방 간의 이사 비용 차이를 비교해보고, 주요 지역별 이삿짐센터 선택 시 고려사항을 알아보겠습니다.</p>
+
+                <div class="regional-keywords">
+                    <div>
+                        <h4>수도권 주요 지역</h4>
+                        <ul>
+                            <li><strong>서울 (강남구, 서초구, 송파구):</strong> 인건비가 높고 이사 수요가 많아 비용이 비싼 편입니다. 좁은 골목과 주차 문제로 사다리차 이용이 필수적인 경우가 많습니다.</li>
+                            <li><strong>경기 (수원, 분당, 일산, 고양):</strong> 수도권 내에서 이사 수요가 집중되는 지역입니다. 포장이사와 일반이사 서비스 모두 활발하며, 업체 간 경쟁이 치열하여 비교 견적이 용이합니다.</li>
+                            <li><strong>인천 (부평, 연수, 송도):</strong> 신도시와 구도심이 혼재하며, 원룸/소형 이사 수요가 많습니다.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>영남권 주요 지역</h4>
+                        <ul>
+                            <li><strong>부산 (해운대, 동래구, 사상구):</strong> 대도시 특성상 이사 비용이 높지만, 항만 물류가 발달하여 장거리 이사 시 운송비가 효율적일 수 있습니다.</li>
+                            <li><strong>대구 (수성구, 달서구):</strong> 포장이사 전문업체들이 다수 활동하며, 대구 특유의 이사 문화를 반영하여 견적을 내는 경우가 많습니다.</li>
+                            <li><strong>울산 (남구, 북구):</strong> 산업도시 특성상 짐이 많은 가구 이사 수요가 많습니다.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>그 외 주요 도시</h4>
+                        <ul>
+                            <li><strong>대전 (유성구, 서구):</strong> 지리적 이점을 활용하여 전국 어디든 이사가 용이하며, 상대적으로 합리적인 가격대를 형성합니다.</li>
+                            <li><strong>광주 (광산구, 서구):</strong> 광주 지역 내 이사 수요와 타지역으로의 이동이 활발합니다.</li>
+                            <li><strong>세종시:</strong> 공무원 이동이 잦은 지역으로, 단기 이사나 반포장이사 수요가 높습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>전국 이삿짐센터 검색 키워드 모음</h3>
+                <ul class="keyword-list">
+                    <li>#서울포장이사</li>
+                    <li>#부산이삿짐센터</li>
+                    <li>#대구일반이사</li>
+                    <li>#인천포장이사견적</li>
+                    <li>#광주이사비용</li>
+                    <li>#대전포장이사추천</li>
+                    <li>#수원이사센터</li>
+                    <li>#성남포장이사</li>
+                    <li>#고양이사잘하는곳</li>
+                    <li>#용인이사견적</li>
+                    <li>#천안포장이사</li>
+                    <li>#청주이사</li>
+                    <li>#전주포장이사</li>
+                    <li>#제주도이사</li>
+                    <li>#강릉포장이사</li>
+                    <li>#춘천이사</li>
+                    <li>#울산포장이사</li>
+                    <li>#창원일반이사</li>
+                    <li>#포항이사</li>
+                    <li>#구미포장이사</li>
+                    <li>#김해이사</li>
+                    <li>#파주이삿짐센터</li>
+                    <li>#김포포장이사</li>
+                    <li>#부천이사</li>
+                    <li>#화성이사</li>
+                    <li>#안산포장이사</li>
+                    <li>#평택포장이사</li>
+                    <li>#동탄이사</li>
+                </ul>
+                <p>위 키워드를 활용하여 해당 지역의 포장이사 및 일반이사 업체를 검색하고, 여러 업체와 비교 견적을 진행할 수 있습니다. 특히 2026년에는 이사 날짜가 몰리는 시기(손 없는 날, 특정 주말)를 피하는 것이 비용 절감의 핵심입니다.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>자주 묻는 질문 (FAQ)</h2>
+
+                <div class="faq-item">
+                    <h3>일반이사를 포장이사처럼 이용할 수 있나요? (반포장이사)</h3>
+                    <p>일반적으로는 불가능하지만, '반포장이사' 서비스를 이용하면 포장 서비스를 부분적으로 지원받을 수 있습니다. 반포장이사는 고객이 귀중품과 잔짐을 포장하고, 업체가 가구와 가전, 큰 짐을 포장하여 운반합니다. 도착지에서는 고객이 직접 짐을 정리해야 합니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>이사견적 시 '방문 견적'이 필수인가요?</h3>
+                    <p>네, 정확한 견적을 위해서는 방문 견적이 필수적입니다. 전화나 온라인 견적은 짐의 양을 정확하게 파악하기 어렵습니다. 방문 견적을 통해 짐의 부피, 특수 가구 여부, 이사 환경(엘리베이터 유무, 계단 작업) 등을 현장에서 확인해야 정확한 비용을 산출할 수 있습니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>이사 당일 추가 비용이 발생하는 경우는 어떤 경우인가요?</h3>
+                    <p>견적 시 협의되지 않은 짐이 추가되는 경우, 이사 환경이 예상과 다른 경우(주차 공간 부족, 사다리차 진입 불가, 짐 이동 경로의 어려움 등), 에어컨 분리/설치나 특수 청소 등 추가 옵션을 요청하는 경우에 추가 비용이 발생할 수 있습니다. 계약서 작성 시 추가 비용 발생 여부를 꼼꼼히 확인해야 합니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>이사 중 물품 파손 시 보상 절차는 어떻게 되나요?</h3>
+                    <p>이사 중 파손이 발생하면 즉시 현장에서 팀장에게 알리고 사진을 찍어 증거를 확보해야 합니다. 업체가 피해보상보험에 가입되어 있다면, 보험을 통해 수리비나 손해배상을 받을 수 있습니다. 보상 절차는 업체별로 다를 수 있으므로, 계약서에 명시된 보상 규정을 확인하는 것이 중요합니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>비용이 너무 저렴한 이삿짐센터는 피하는 것이 좋나요?</h3>
+                    <p>네, 그렇습니다. 시장 평균보다 현저히 낮은 가격을 제시하는 업체는 불법 영업이나 미숙련 인력 고용, 혹은 서비스 품질 저하의 위험이 있습니다. 이사 당일 추가 비용을 요구하거나 AS 보상이 제대로 이루어지지 않을 가능성이 높습니다. 최소 2~3곳의 견적을 비교하여 적절한 가격대인지 확인하는 것이 좋습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>신뢰할 수 있는 외부 자료 및 참고 링크</h2>
+                <p>성공적인 이사를 위해 이삿짐센터 선택 시 도움이 되는 법적 기준, 소비자 보호 규정 등을 참고할 수 있는 공인된 외부 자료입니다.</p>
+                <ul>
+                    <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%99%94%EB%AC%BC%EC%9A%B4%EC%86%A1%EC%97%85%EA%B3%BC%EC%A0%9C%EB%8F%84%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0" target="_blank" rel="noopener">법제처 - 「화물자동차 운수사업법」 (이사업체 법적 기준 관련)</a></li>
+                    <li><a href="https://www.consumer.go.kr/smpl/info/cnslt/info/list.do?searchCtgr=041&searchKey=041" target="_blank" rel="noopener">한국소비자원 - 이사 관련 피해사례 및 소비자 정보</a></li>
+                    <li><a href="https://www.sbiz.or.kr/site/sbiz/ex/biztype/biztypeView.do?DT_IDX=123" target="_blank" rel="noopener">소상공인시장진흥공단 - 이사업체 사업 유형 안내</a></li>
+                    <li><a href="https://namu.wiki/w/%EC%9D%B4%EC%82%AC" target="_blank" rel="noopener">나무위키 - 이사 관련 정보 및 일반적인 상식</a></li>
+                    <li><a href="https://www.gov.kr/portal/lawService.do?menuId=2&query=%EC%9D%B4%EC%82%AC" target="_blank" rel="noopener">정부24 - 이사 관련 민원 및 행정서비스 안내</a></li>
+                    <li><a href="https://www.cctv.go.kr/cctvinfo/movingservicesafety.jsp" target="_blank" rel="noopener">CCTV 관제센터 - 이삿짐 운송 안전 정보</a></li>
+                </ul>
+                <p>위 자료들은 이삿짐센터 선택 시 법적 기준, 소비자 권리, 서비스 내용 비교 등에 유용한 정보입니다.</p>
+            </div>
+        </section>
+
     </main>
-  </body>
-</html>
+
+    <footer>
+        <div class="container">
+            <p><strong>포장이사 vs 일반이사 비교센터</strong> &copy; 2026 All Rights Reserved.</p>
+            <p>
+                <a href="#">개인정보처리방침</a>
+                <a href="#">이용약관</a>
+                <a href="#">문의하기</a>
+            </p>
+            <p>본 사이트는 전국 포장이사 및 일반이사 업체 비교정보를 제공하며, 실제 계약은 선택하신 업체와 직접 진행됩니다. 저희는 중개 플랫폼으로서 이사 과정에서 발생하는 직접적인 문제에 대한 책임은 지지 않습니다.</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ 토글 기능
+        document.querySelectorAll('.faq-item h3').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+                const answer = parent.querySelector('p');
+                if (parent.classList.contains('active')) {
+                    answer.style.display = 'block';
+                } else {
+                    answer.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+  
